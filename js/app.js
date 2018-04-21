@@ -15,7 +15,7 @@ resetButton.addEventListener('click', (e) => {         //Attach a event listener
   overlay.style.display = 'none';                     // hide the start screen overlay.
 });
 
-let phrases = ['Wheel of success is fun', 'Treehouse is awesome', 'Javascript hurts my head', 'I love cats', 'my super coding projects'];      //Create a phrases array that contains at least 5 different phrases as strings.
+let phrases = ['Wheel of success is fun', 'Treehouse is awesome', 'Javascript hurts my head', 'I love cats',  'coding projects rock'];      //Create a phrases array that contains at least 5 different phrases as strings.
 
 function getRandomPhraseAsArray(array){                                       //Create a getRandomPhraseAsArray function.//write the function so that it takes an array as an parameter:
   const randomPhrase = array[Math.floor(Math.random() * array.length)];       //This function should randomly choose a phrase from the phrases array
@@ -33,13 +33,13 @@ function addPhraseToDisplay(array){                                         //Cr
     const li = document.createElement('li');                                //Inside the loop create a list item,
     phrase.appendChild(li);                                                 //append that list item to the #phrase ul
     li.textContent = array[i];
-                                                                            // If the character in the array is a letter and not a space,
-                                                                            //the function should add the class “letter” to the list item.
-    if (array[i] !== ' ') {
+
       li.className = 'letter';
+if (array[i] !== ' ') {
     } else {
       li.className = 'space';
-    }
+    }                                                                   // If the character in the array is a letter and not a space,
+                                                                      //the function should add the class “letter” to the list item.
   }
 }
 
@@ -82,9 +82,9 @@ const buttonClicked = button.textContent.toUpperCase();
 
 //use if else statements***********************************
 //       If ();                                                      //If the checkLetter function returns a null value,
-const hearts = document.querySelectorAll('.tries img');          //the player has guessed the wrong letter
+const hearts = document.querySelectorAll('.tries img');              //the player has guessed the wrong letter
 hearts[0].src = '../images/lostHeart.png';
-               //If the value is null,
+                                                                     //If the value is null,
   // remove.src(removeHeart);                                        //remove one of the tries from the scoreboard.
     //missed ++;                                                     //When you remove a try from the scoreboard, make sure to increase the missed count by 1.
 
@@ -96,22 +96,22 @@ hearts[0].src = '../images/lostHeart.png';
 
   //    function checkWin();                                 //Create a checkWin function.
 //const guesses = document.querySelectorAll('.show');
-// let overlay = document.getElementById('overlay');                                                            //Each time the player guesses a letter,
+// let overlay = document.getElementById('overlay');           //Each time the player guesses a letter,
                                                               //this function will check whether the game has been won or lost.
                                                               //At the very end of the keyboard event listener,
                                                              //run this function to check if the number of letters with class “show”
-    //  OR ///////                                                         //is equal to the number of letters with class “letters”.
+                                                           //is equal to the number of letters with class “letters”.
 
-//use if else statements**************************************************************
+//use if else statements***********************************
   // if (letter[i].classList('.show') == letter [i].textContent) {                                                     //If number of letters with class "show" and number of letters with class "letters" are equal,
-  //           overlay.style.classList.add ='win';    ????           //show the overlay screen with the “win” class and appropriate text.
-
+  //           overlay.style.classList.add ='win';               //show the overlay screen with the “win” class and appropriate text.
+// title[0].textContent = 'You WON!';
 //else*******************
 // }else {                                                         // Otherwise, if the number of misses is equal to or greater than 5,
 //       if( missed = < 5);
 
-
-//overlay.style.display ='lose';  ??????                         //show the overlay screen with the “lose” class and appropriate text.
+// title[0].textContent = 'Sorry, you lost';
+//overlay.style.display.add ='lose';                   //show the overlay screen with the “lose” class and appropriate text.
 //***********************************************************************************
 
 //}
@@ -126,14 +126,11 @@ hearts[0].src = '../images/lostHeart.png';
                                                                   //and set the number of misses to zero.
 
 
-// const resetButton = document.createElement('resetButton');            /Add a button to the “success” and “failure” screens that reset the game.
+// const newGameButton = document.createElement('resetButton');   /Add a button to the “success” and “failure” screens that reset the game.
 
-// const numMisses = 0;
-// resetButton.textContent = "reset";
-// li.appendChild(resetButton);
-// return li;
 
-// resetButton.addEventListener('click', (e)) => {
+
+// newGameButton.addEventListener('click', (e)) => {
 //   if (e.target.tagName === "RESET"){
 //     if (e.target.textContent ==" "){
 //
