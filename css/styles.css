@@ -62,7 +62,6 @@ button {
 .header {
   color: var(--color-start); }
 
-/* Scoreboard */
 /* Phrase */
 .letter {
   font-size: var(--font-size-medium);

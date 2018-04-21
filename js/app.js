@@ -46,15 +46,19 @@ function addPhraseToDisplay(array){                                         //Cr
 addPhraseToDisplay(phraseArray);                                              //save it to a variable, and pass it to addPhraseToDisplay as an argument:
 
 qwerty.addEventListener('click', (e) => {                //Add an event listener to the keyboard.//Use event delegation to listen only to button events from the keyboard.
-if (e.target.tagName = "BUTTON"){
+if (e.target.tagName === "BUTTON"){
                                                           //When a player chooses a letter,
                                                           //add the "chosen" class to that button so the same letter can’t be chosen twice.
                                                           //Note that button elements have an attribute you can set called “disabled” that when set to true will not respond to user clicks.
   e.target.className = 'chosen';
   e.target.disabled = true;
 
-                                                          //Pass the button to the checkLetter function,
-                                                          //and store the letter returned inside of a variable called letterFound.
+const match = checkLetter(e.target);                                      //Pass the button to the checkLetter function,
+  if (!match) {
+    missed++;
+    hearts[hearts.length - i].src = '../images/lostHeart.png';
+
+  }                                                                       //and store the letter returned inside of a variable called letterFound.
 }
 });
 
@@ -66,21 +70,23 @@ const buttonClicked = button.textContent.toUpperCase();
   for (let i = 0; i < letter.length; i += 1 ) {               //The function should loop over the letters and check if they match the letter in the button the player has chosen.
         if ( buttonClicked === letter[i].textContent ){       //If there’s a match,
           letter[i].classList.add('show');                    //the function should add the “show” class to the list item containing that letter,
-              return letterFound = true;                      // store the matching letter inside of a variable,
+              letterFound = true;                      // store the matching letter inside of a variable,
             }
-          } return letterFound;
+          }
+          return letterFound ? buttonClicked : null;
         };                                                    //and return that letter.
 
                                                                   //else ******
                                                                   //If a match wasn’t found,
                                                                   //the function should return null.
 
-//use if else statements*******************************************************************
-//       If ();                        //If the checkLetter function returns a null value,
-      //const removeHeart = document.getElementByName(img);                                   //the player has guessed the wrong letter
+//use if else statements***********************************
+//       If ();                                                      //If the checkLetter function returns a null value,
+const hearts = document.querySelectorAll('.tries img');          //the player has guessed the wrong letter
+hearts[0].src = '../images/lostHeart.png';
                //If the value is null,
-  // remove.src(removeHeart);                                            //remove one of the tries from the scoreboard.
-    //missed ++;                                                        //When you remove a try from the scoreboard, make sure to increase the missed count by 1.
+  // remove.src(removeHeart);                                        //remove one of the tries from the scoreboard.
+    //missed ++;                                                     //When you remove a try from the scoreboard, make sure to increase the missed count by 1.
 
 
 
@@ -89,22 +95,23 @@ const buttonClicked = button.textContent.toUpperCase();
 //*****************************************************************************************
 
   //    function checkWin();                                 //Create a checkWin function.
-
-                                                              //Each time the player guesses a letter,
+//const guesses = document.querySelectorAll('.show');
+// let overlay = document.getElementById('overlay');                                                            //Each time the player guesses a letter,
                                                               //this function will check whether the game has been won or lost.
                                                               //At the very end of the keyboard event listener,
                                                              //run this function to check if the number of letters with class “show”
-                                                             //is equal to the number of letters with class “letters”.
+    //  OR ///////                                                         //is equal to the number of letters with class “letters”.
 
 //use if else statements**************************************************************
   // if (letter[i].classList('.show') == letter [i].textContent) {                                                     //If number of letters with class "show" and number of letters with class "letters" are equal,
-  //           overlay.style.display ='win';                  //show the overlay screen with the “win” class and appropriate text.
+  //           overlay.style.classList.add ='win';    ????           //show the overlay screen with the “win” class and appropriate text.
+
 //else*******************
 // }else {                                                         // Otherwise, if the number of misses is equal to or greater than 5,
 //       if( missed = < 5);
 
 
-//overlay.style.display ='lose';                   //show the overlay screen with the “lose” class and appropriate text.
+//overlay.style.display ='lose';  ??????                         //show the overlay screen with the “lose” class and appropriate text.
 //***********************************************************************************
 
 //}
@@ -127,7 +134,7 @@ const buttonClicked = button.textContent.toUpperCase();
 // return li;
 
 // resetButton.addEventListener('click', (e)) => {
-//   if (e.target.tagName = "RESET"){
+//   if (e.target.tagName === "RESET"){
 //     if (e.target.textContent ==" "){
 //
 //     }
