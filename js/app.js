@@ -5,14 +5,29 @@
 
 
 
-const qwerty = document.getElementById('qwerty');        //Get the element with the ID of qwerty and save it to a variable.
-let missed = 0;                                         //Count the missed guesses in the game.//create a variable, initialized to 0,
+const qwerty = document.getElementById('qwerty');                       //Get the element with the ID of qwerty and save it to a variable.
+let missed = 0;                                                       //Count the missed guesses in the game.//create a variable, initialized to 0,
 
 const overlay = document.getElementById('overlay');
 const resetButton = document.querySelector('.btn__reset');
+const hearts = document.querySelectorAll('.tries img');
+const title = document.querySelector('.title');
+const listItems = document.getElementsByClassName('letter');
 
-resetButton.addEventListener('click', (e) => {         //Attach a event listener to the “Start Game” button
-  overlay.style.display = 'none';                     // hide the start screen overlay.
+resetButton.addEventListener('click', (e) => {                          //Attach a event listener to the “Start Game” button
+  overlay.style.display = 'none';                                       // hide the start screen overlay.
+  overlay.className = 'start';
+  missed = 0;
+  for (let i = 0; i < listItems.length; i++) {
+    listItems[i].classList.remove('show');
+  }
+  for (let i = 0; i < keyButtons.length; i++) {
+    keyButtons[i].removeAttribute('class');
+    keyButtons[i].removeAttribute('disabled');
+  }
+  for (let i = 0; i < hearts.length; i++) {
+    hearts[i].src = 'images/liveHeart.png';
+  }
 });
 
 let phrases = ['Wheel of success is fun', 'Treehouse is awesome', 'Javascript hurts my head', 'I love cats',  'coding projects rock'];      //Create a phrases array that contains at least 5 different phrases as strings.
@@ -56,9 +71,9 @@ if (e.target.tagName === "BUTTON"){
 const match = checkLetter(e.target);                                      //Pass the button to the checkLetter function,
   if (!match) {
     missed++;
-    hearts[hearts.length - i].src = '../images/lostHeart.png';
-
-  }                                                                       //and store the letter returned inside of a variable called letterFound.
+  hearts[hearts.length - missed].src = '../images/lostHeart.png';
+  }
+  checkWin();                                                                       //and store the letter returned inside of a variable called letterFound.
 }
 });
 
@@ -70,7 +85,7 @@ const buttonClicked = button.textContent.toUpperCase();
   for (let i = 0; i < letter.length; i += 1 ) {               //The function should loop over the letters and check if they match the letter in the button the player has chosen.
         if ( buttonClicked === letter[i].textContent ){       //If there’s a match,
           letter[i].classList.add('show');                    //the function should add the “show” class to the list item containing that letter,
-              letterFound = true;                      // store the matching letter inside of a variable,
+              letterFound = true;                             // store the matching letter inside of a variable,
             }
           }
           return letterFound ? buttonClicked : null;
@@ -80,45 +95,37 @@ const buttonClicked = button.textContent.toUpperCase();
                                                                   //If a match wasn’t found,
                                                                   //the function should return null.
 
-//use if else statements***********************************
-//       If ();                                                      //If the checkLetter function returns a null value,
-const hearts = document.querySelectorAll('.tries img');              //the player has guessed the wrong letter
-hearts[0].src = '../images/lostHeart.png';
-                                                                     //If the value is null,
-  // remove.src(removeHeart);                                        //remove one of the tries from the scoreboard.
-    //missed ++;                                                     //When you remove a try from the scoreboard, make sure to increase the missed count by 1.
+                                                                  //If the checkLetter function returns a null value,
+
+                                                                    //If the value is null,
+                                                                      //remove one of the tries from the scoreboard.
+                                                                      //When you remove a try from the scoreboard, make sure to increase the missed count by 1.
+
+function checkWin() {                                //Create a checkWin function.
+  const guesses = document.querySelectorAll('.show');                                                       //Each time the player guesses a letter,
+   if (letter.length === guesses.length) {                                                             //this function will check whether the game has been won or lost.
+      overlay.classList.replace('start','win');                                     //If number of letters with class "show" and number of letters with class "letters" are equal,
+      title.textContent = 'You WON!';
+      overlay.style.display = 'block';
+      resetButton.textContent = 'Reset';                                                  //show the overlay screen with the “win” class and appropriate text.
+    } else if (missed >= 5) {
+      overlay.classList.replace('start','lose');
+      title.textContent = 'Sorry, you lost';
+      overlay.style.display = 'block';
+      resetButton.textContent = 'Reset';                     //At the very end of the keyboard event listener,
+    }                                                                  //is equal to the number of letters with class “letters”.
+}
 
 
 
+                                                               // Otherwise, if the number of misses is equal to or greater than 5,
 
+                                                              //show the overlay screen with the “lose” class and appropriate text.
 
-//*****************************************************************************************
-
-  //    function checkWin();                                 //Create a checkWin function.
-//const guesses = document.querySelectorAll('.show');
-// let overlay = document.getElementById('overlay');           //Each time the player guesses a letter,
-                                                              //this function will check whether the game has been won or lost.
-                                                              //At the very end of the keyboard event listener,
-                                                             //run this function to check if the number of letters with class “show”
-                                                           //is equal to the number of letters with class “letters”.
-
-//use if else statements***********************************
-  // if (letter[i].classList('.show') == letter [i].textContent) {                                                     //If number of letters with class "show" and number of letters with class "letters" are equal,
-  //           overlay.style.classList.add ='win';               //show the overlay screen with the “win” class and appropriate text.
-// title[0].textContent = 'You WON!';
-//else*******************
-// }else {                                                         // Otherwise, if the number of misses is equal to or greater than 5,
-//       if( missed = < 5);
-
-// title[0].textContent = 'Sorry, you lost';
-//overlay.style.display.add ='lose';                   //show the overlay screen with the “lose” class and appropriate text.
-//***********************************************************************************
 
 //}
 //exceeds steps
 ///Create CSS transitions for each letter in the phrase display as they are revealed.
-
-          //document.querySelectorAll("letter").style.transition = "all 2s";
 
 
                                                                   //You’ll have to recreate the buttons in the keyboard,
@@ -126,19 +133,4 @@ hearts[0].src = '../images/lostHeart.png';
                                                                   //and set the number of misses to zero.
 
 
-// const newGameButton = document.createElement('resetButton');   /Add a button to the “success” and “failure” screens that reset the game.
-
-
-
-// newGameButton.addEventListener('click', (e)) => {
-//   if (e.target.tagName === "RESET"){
-//     if (e.target.textContent ==" "){
-//
-//     }
-//   }
-//if (e.target.tagName == "reset game?"){
-//reset();
-//}
-//
-//
-// });
+   //Add a button to the “success” and “failure” screens that reset the game.
